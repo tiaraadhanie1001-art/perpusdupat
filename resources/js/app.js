@@ -21,4 +21,37 @@ document.addEventListener('alpine:init', () => {
     });
 });
 
+// Lightweight Scroll-Reveal Controller using native IntersectionObserver
+function initScrollObserver() {
+    if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.scroll-reveal').forEach(el => el.classList.add('revealed'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px 0px -30px 0px',
+        threshold: 0.05
+    });
+
+    document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollObserver);
+} else {
+    initScrollObserver();
+}
+
+window.initScrollObserver = initScrollObserver;
+
 Alpine.start();

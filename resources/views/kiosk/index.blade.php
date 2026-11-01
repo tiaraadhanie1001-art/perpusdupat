@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-[#FAF8F5]">
+<html lang="id" class="h-full bg-[#f6f8fa]">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,11 +8,11 @@
     <title>Kiosk Presensi Mandiri - Perpus Dupat</title>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700|newsreader:400,500,600,700|lora:400,500,600,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-full font-sans antialiased text-stone-800 bg-[#FAF8F5] flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
+<body class="h-full font-sans antialiased text-gray-900 bg-[#f6f8fa] flex flex-col justify-between p-4 sm:p-6 lg:p-8 select-none"
       x-data="{
         nis: '',
         purpose: 'Membaca',
@@ -96,36 +96,34 @@
         }
       }">
 
-    <!-- Top Header (Bookhaven Editorial Palette) -->
-    <header class="flex items-center justify-between border-b border-[#E7E3DA] pb-5">
-        <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-[#183527] border border-[#224A35] flex items-center justify-center font-bold text-[#E5C158] shadow-sm">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    <!-- Top Header with Scroll-Reveal -->
+    <header class="flex items-center justify-between border-b border-[#e1e5e6] pb-4 scroll-reveal">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-[#279b92] flex items-center justify-center text-white shadow-2xs">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
             </div>
             <div>
-                <h1 class="font-serif text-xl font-bold tracking-tight text-stone-900 flex items-center gap-2">
-                    PERPUS DUPAT
-                    <span class="text-xs font-sans font-semibold px-2.5 py-0.5 rounded-full bg-[#EAEFD9] text-[#2B5941] border border-[#C6D8B3]">
-                        KIOSK SISWA
-                    </span>
+                <h1 class="text-lg font-bold tracking-tight text-gray-900 flex items-center gap-2">
+                    <span>PERPUS DUPAT</span>
+                    <span class="text-xs font-semibold text-[#279b92] tracking-wider uppercase">• Kiosk Mandiri</span>
                 </h1>
-                <p class="text-xs text-stone-500 mt-0.5">Stasiun Mandiri Presensi Pengunjung Perpustakaan (Client Node LAN)</p>
+                <p class="text-xs text-gray-500">Stasiun Presensi Siswa & Civitas Sekolah &bull; Node LAN</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-5">
             <!-- Clock -->
             <div class="text-right hidden sm:block">
-                <div class="text-2xl font-serif font-bold text-[#183527] tracking-wider" x-text="currentTime"></div>
-                <div class="text-[11px] text-stone-500 font-medium" x-text="currentDate"></div>
+                <div class="text-xl font-bold text-gray-900 tracking-tight font-sans" x-text="currentTime"></div>
+                <div class="text-[11px] text-gray-500 font-medium" x-text="currentDate"></div>
             </div>
 
             <!-- Portal Login Link -->
-            <a href="{{ route('login') }}" class="px-4 py-2.5 rounded-xl bg-white hover:bg-[#F5F2EB] text-stone-700 hover:text-stone-900 border border-[#E7E3DA] shadow-2xs hover:border-[#D6CEBF] text-xs font-semibold transition flex items-center gap-2">
-                <span>Masuk Portal Siswa</span>
-                <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('login') }}" class="btn-press px-3.5 py-2 rounded-lg bg-white hover:bg-[#e1e5e6]/40 text-gray-700 border border-[#e1e5e6] shadow-2xs text-xs font-medium transition flex items-center gap-1.5 active:scale-[0.98]">
+                <span>Masuk Portal</span>
+                <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
             </a>
@@ -133,34 +131,33 @@
     </header>
 
     <!-- Main Content Area -->
-    <main class="my-auto py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-7xl w-full mx-auto">
-        <!-- Left: Check-in Box -->
-        <div class="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E3DA] shadow-xs space-y-6">
+    <main class="my-auto py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start max-w-7xl w-full mx-auto">
+        <!-- Left: Check-in Box with Scroll-Reveal & Card Hover -->
+        <div class="scroll-reveal delay-1 lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-[#e1e5e6] space-y-5 shadow-xs card-hover">
             <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EAEFD9] border border-[#C6D8B3] text-[#2B5941] text-xs font-semibold mb-3">
-                    <span class="w-2 h-2 rounded-full bg-[#2B5941] animate-pulse"></span>
+                <div class="text-xs font-semibold text-[#279b92] tracking-wide mb-1">
                     Stasiun Presensi Cepat
                 </div>
-                <h2 class="font-serif text-2xl lg:text-3xl font-bold text-stone-900 tracking-tight">Presensi Kunjungan Anda</h2>
-                <p class="text-xs text-stone-500 mt-1">Tempelkan barcode kartu atau ketik Nomor Induk Siswa (NIS), lalu tekan Enter.</p>
+                <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Presensi Kunjungan Anda</h2>
+                <p class="text-xs text-gray-500 mt-1">Ketikkan Nomor Induk Siswa (NIS) atau pindai barcode kartu perpustakaan Anda.</p>
             </div>
 
             <!-- NIS Form -->
-            <form @submit.prevent="submitCheckIn()" class="space-y-5">
+            <form @submit.prevent="submitCheckIn()" class="space-y-4">
                 <div>
-                    <label for="kiosk-nis" class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">
+                    <label for="kiosk-nis" class="block text-xs font-medium text-gray-700 mb-1.5">
                         Nomor Induk Siswa (NIS)
                     </label>
                     <div class="relative">
                         <input type="text"
-                               id="kiosk-nis"
-                               x-ref="nisInput"
-                               x-model="nis"
-                               required
-                               autocomplete="off"
-                               placeholder="Contoh: 2024101"
-                               class="w-full px-5 py-4 rounded-2xl bg-[#FAF8F5] border-2 border-[#D6CEBF] text-xl font-mono text-[#183527] placeholder:text-stone-400 focus:border-[#183527] focus:ring-4 focus:ring-[#183527]/10 focus:outline-none transition shadow-inner">
-                        <div class="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 font-mono text-xs">
+                                id="kiosk-nis"
+                                x-ref="nisInput"
+                                x-model="nis"
+                                required
+                                autocomplete="off"
+                                placeholder="Contoh: 2024101"
+                                class="w-full px-4 py-3 rounded-xl bg-white border border-[#e1e5e6] text-lg font-mono text-gray-900 placeholder:text-gray-400 focus:border-[#279b92] focus:ring-1 focus:ring-[#279b92] outline-none transition">
+                        <div class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 font-mono text-xs">
                             [Tekan Enter]
                         </div>
                     </div>
@@ -168,7 +165,7 @@
 
                 <!-- Purpose Selector -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-600 uppercase tracking-wider mb-2">
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">
                         Tujuan Kunjungan
                     </label>
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -183,8 +180,8 @@
                         @foreach($purposes as $val => $label)
                             <button type="button"
                                     @click="setPurpose('{{ $val }}')"
-                                    :class="purpose === '{{ $val }}' ? 'bg-[#183527] text-[#FAF8F5] border-[#183527] shadow-sm' : 'bg-[#FAF8F5] text-stone-600 border-[#E7E3DA] hover:bg-[#F5F2EB] hover:border-[#D6CEBF]'"
-                                    class="py-3 px-3 rounded-xl border text-xs font-bold transition text-center focus:outline-none">
+                                    :class="purpose === '{{ $val }}' ? 'bg-[#279b92] text-white shadow-xs' : 'bg-[#e1e5e6]/60 text-gray-700 hover:bg-[#e1e5e6]'"
+                                    class="py-2.5 px-3 rounded-xl text-xs font-medium transition text-center focus:outline-none hover:-translate-y-0.5 active:translate-y-0">
                                 {{ $label }}
                             </button>
                         @endforeach
@@ -194,63 +191,58 @@
                 <!-- Submit Button -->
                 <button type="submit"
                         :disabled="isLoading"
-                        class="w-full py-4 px-6 rounded-2xl bg-[#183527] hover:bg-[#234A37] active:scale-[0.99] text-[#FAF8F5] font-serif font-bold text-base shadow-sm hover:shadow transition flex items-center justify-center gap-3">
-                    <span x-show="isLoading" class="w-5 h-5 border-2 border-[#E5C158] border-t-transparent rounded-full animate-spin"></span>
+                        class="btn-press w-full py-3 px-6 rounded-xl bg-[#279b92] hover:bg-[#1f8078] active:scale-[0.99] text-white font-medium text-sm transition flex items-center justify-center gap-2 shadow-2xs">
+                    <span x-show="isLoading" class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                     <span x-text="isLoading ? 'Mencatat Kehadiran...' : 'Konfirmasi Kehadiran (Check-In)'"></span>
-                    <svg class="w-5 h-5 text-[#E5C158]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </button>
             </form>
 
-            <div class="pt-4 border-t border-[#F0ECE1] text-[11px] text-stone-500 flex items-center justify-between">
-                <span>Contoh NIS demo: <code class="bg-[#F0ECE1] text-stone-800 font-mono px-1.5 py-0.5 rounded">2024101</code>, <code class="bg-[#F0ECE1] text-stone-800 font-mono px-1.5 py-0.5 rounded">2024102</code></span>
-                <span class="text-stone-400">Subnet LAN Mode</span>
+            <div class="pt-3 border-t border-[#e1e5e6] text-[11px] text-gray-500 flex items-center justify-between">
+                <span>Contoh NIS demo: <code class="bg-[#e1e5e6]/60 text-gray-700 font-mono px-1.5 py-0.5 rounded">2024101</code>, <code class="bg-[#e1e5e6]/60 text-gray-700 font-mono px-1.5 py-0.5 rounded">2024102</code></span>
+                <span class="text-gray-400 font-mono">Subnet LAN Mode</span>
             </div>
         </div>
 
-        <!-- Right: Real-time Visitor Stream -->
-        <div class="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-[#E7E3DA] shadow-xs space-y-5">
-            <div class="flex items-center justify-between pb-3 border-b border-[#F0ECE1]">
+        <!-- Right: Real-time Visitor Stream with Scroll-Reveal & Card Hover -->
+        <div class="scroll-reveal delay-2 lg:col-span-6 bg-white rounded-2xl p-6 sm:p-8 border border-[#e1e5e6] space-y-4 shadow-xs card-hover">
+            <div class="flex items-center justify-between pb-3 border-b border-[#e1e5e6]">
                 <div>
-                    <h3 class="font-serif text-base font-bold text-stone-900">Antrean Kunjungan Terkini</h3>
-                    <p class="text-xs text-stone-500 mt-0.5">Daftar kehadiran hari ini secara real-time</p>
+                    <h3 class="text-sm font-bold text-gray-900">Antrean Kunjungan Terkini</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">Daftar kehadiran hari ini secara real-time</p>
                 </div>
                 <div class="text-right">
-                    <span class="text-xs text-stone-400 uppercase font-semibold">Total Hari Ini</span>
-                    <div class="font-serif text-2xl font-bold text-[#183527]" x-text="totalToday + ' Siswa'"></div>
+                    <span class="text-[10px] text-gray-400 uppercase font-semibold">Total Hari Ini</span>
+                    <div class="text-xl font-bold text-[#279b92] font-sans" x-text="totalToday + ' Siswa'"></div>
                 </div>
             </div>
 
             <!-- List of visitors -->
-            <div class="divide-y divide-[#F0ECE1] max-h-[380px] overflow-y-auto pr-1">
+            <div class="divide-y divide-[#e1e5e6]/60 max-h-[380px] overflow-y-auto pr-1">
                 <template x-for="item in recentVisits" :key="item.id">
-                    <div class="py-3 flex items-center justify-between hover:bg-[#FAF8F5] rounded-xl px-2 transition">
+                    <div class="py-2.5 flex items-center justify-between hover:bg-[#279b92]/5 hover:translate-x-0.5 rounded-lg px-2 transition-all duration-150">
                         <div class="flex items-center gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-[#EAEFD9] text-[#2B5941] flex items-center justify-center font-bold text-xs uppercase border border-[#C6D8B3]">
+                            <div class="w-8 h-8 rounded-full bg-[#e1e5e6]/60 text-[#279b92] flex items-center justify-center font-semibold text-xs uppercase border border-[#e1e5e6] shadow-2xs">
                                 <span x-text="item.name ? item.name.substring(0, 2) : 'S'"></span>
                             </div>
                             <div>
-                                <div class="text-xs font-semibold text-stone-900" x-text="item.name"></div>
-                                <div class="text-[11px] text-stone-500">NIS: <span class="font-mono text-stone-600" x-text="item.nis"></span></div>
+                                <div class="text-xs font-semibold text-gray-900" x-text="item.name"></div>
+                                <div class="text-[11px] text-gray-400 font-mono">NIS: <span class="text-gray-600" x-text="item.nis"></span></div>
                             </div>
                         </div>
 
                         <div class="text-right">
-                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-medium border"
-                                  :class="{
-                                      'bg-[#FDF4E7] text-[#9A6A1E] border-[#F3DFC1]': item.purpose && item.purpose.toLowerCase().includes('pinjam'),
-                                      'bg-[#EAEFD9] text-[#2B5941] border-[#C6D8B3]': item.purpose && item.purpose.toLowerCase().includes('baca'),
-                                      'bg-[#F0ECE1] text-stone-700 border-[#DDD5C7]': !item.purpose || (!item.purpose.toLowerCase().includes('pinjam') && !item.purpose.toLowerCase().includes('baca'))
-                                  }"
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#e1e5e6]/70 text-gray-700 border border-[#e1e5e6]"
                                   x-text="item.purpose"></span>
-                            <div class="text-[10px] text-stone-400 font-mono mt-0.5" x-text="item.time + ' WIB'"></div>
+                            <div class="text-[10px] text-gray-400 font-mono mt-0.5" x-text="item.time + ' WIB'"></div>
                         </div>
                     </div>
                 </template>
 
                 <template x-if="recentVisits.length === 0">
-                    <div class="py-12 text-center text-xs text-stone-500">
+                    <div class="py-12 text-center text-xs text-gray-400">
                         Belum ada siswa yang presensi hari ini. Jadilah yang pertama!
                     </div>
                 </template>
@@ -260,30 +252,30 @@
 
     <!-- Global Toast for Kiosk Notifications -->
     <div x-cloak x-show="$store.toast.show" x-transition class="fixed top-8 left-1/2 -translate-x-1/2 z-50 max-w-md w-full px-4">
-        <div class="rounded-2xl shadow-xl p-4 flex items-center justify-between text-white border"
+        <div class="rounded-xl shadow-xl p-4 flex items-center justify-between border"
              :class="{
-                'bg-[#2B5941] border-[#1F4531]': $store.toast.type === 'success',
-                'bg-[#B84233] border-[#9A3528]': $store.toast.type === 'error',
-                'bg-[#9A6A1E] border-[#7F5413]': $store.toast.type === 'warning',
-                'bg-[#183527] border-[#10241A]': $store.toast.type === 'info'
+                'bg-emerald-50 text-emerald-800 border-emerald-200': $store.toast.type === 'success',
+                'bg-rose-50 text-rose-800 border-rose-200': $store.toast.type === 'error',
+                'bg-amber-50 text-amber-800 border-amber-200': $store.toast.type === 'warning',
+                'bg-[#279b92] text-white border-[#1f8078]': $store.toast.type === 'info'
              }">
             <div class="flex items-center gap-3">
-                <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <div class="text-sm font-bold" x-text="$store.toast.message"></div>
+                <div class="text-xs font-semibold" x-text="$store.toast.message"></div>
             </div>
-            <button @click="$store.toast.close()" class="p-1 rounded-lg text-white/80 hover:text-white">&times;</button>
+            <button @click="$store.toast.close()" class="p-1 rounded text-white/80 hover:text-white">&times;</button>
         </div>
     </div>
 
     <!-- Kiosk Footer -->
-    <footer class="border-t border-[#E7E3DA] pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500 gap-2">
+    <footer class="border-t border-[#e1e5e6] pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-2">
         <div>
-            Stasiun Kiosk Mandiri &bull; Perpustakaan Digital SMA/SMK Negeri &bull; Jalur Subnet LAN
+            Stasiun Kiosk Mandiri &bull; Perpustakaan Digital SMA Negeri 24 &bull; Jalur Subnet LAN
         </div>
         <div>
-            Tekan <kbd class="px-1.5 py-0.5 bg-[#F0ECE1] text-stone-700 rounded border border-[#E7E3DA] text-[10px] font-mono">F11</kbd> untuk Tampilan Layar Penuh (Kiosk Mode)
+            Tekan <kbd class="px-1.5 py-0.5 bg-[#e1e5e6]/60 text-gray-700 rounded border border-[#e1e5e6] text-[10px] font-mono">F11</kbd> untuk Layar Penuh
         </div>
     </footer>
 </body>

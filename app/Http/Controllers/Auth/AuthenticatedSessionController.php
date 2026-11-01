@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::check()) {
             return Auth::user()->isPustakawan()
                 ? redirect()->route('librarian.dashboard')
-                : redirect()->route('student.dashboard');
+                : redirect()->route('books.index');
         }
 
         return view('auth.login');
@@ -40,7 +40,7 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('librarian.dashboard'));
         }
 
-        return redirect()->intended(route('student.dashboard'));
+        return redirect()->route('books.index');
     }
 
     /**

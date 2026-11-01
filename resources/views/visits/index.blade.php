@@ -37,57 +37,60 @@
     }
 }">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 scroll-reveal">
         <div>
-            <h1 class="text-2xl font-bold text-slate-900 tracking-tight">
+            <div class="text-xs font-semibold text-[#279b92] tracking-wide mb-1">
+                Pemantauan & Presensi Siswa
+            </div>
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">
                 {{ auth()->user()->isPustakawan() ? 'Log Kunjungan Perpustakaan' : 'Riwayat Kunjungan Saya' }}
             </h1>
-            <p class="text-xs text-slate-500 mt-1">
-                {{ auth()->user()->isPustakawan() ? 'Rekapitulasi presensi kehadiran siswa dan civitas sekolah di perpustakaan.' : 'Catatan riwayat kunjungan dan kehadiran Anda di perpustakaan.' }}
+            <p class="text-xs text-gray-500 mt-1">
+                {{ auth()->user()->isPustakawan() ? 'Rekapitulasi presensi kehadiran siswa dan civitas sekolah di perpustakaan SMA Negeri 24.' : 'Catatan riwayat kunjungan dan kehadiran Anda di perpustakaan.' }}
             </p>
         </div>
 
-        <div class="flex flex-wrap items-center gap-2">
-            <button type="button" @click="checkinModal = true" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs shadow-sm transition">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Catat Kunjungan
-            </button>
+        @if(auth()->user()->isPustakawan())
+            <div class="flex flex-wrap items-center gap-2">
+                <button type="button" @click="checkinModal = true" class="btn-press inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white font-medium text-xs shadow-2xs transition active:scale-[0.98]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Catat Kunjungan
+                </button>
 
-            @if(auth()->user()->isPustakawan())
-                <a href="{{ route('visits.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-700 font-medium text-xs border border-slate-300 shadow-xs transition" title="Ekspor laporan siap cetak ke format Excel">
-                    <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ route('visits.export', ['start_date' => $startDate, 'end_date' => $endDate]) }}" class="btn-press inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-white hover:bg-[#e1e5e6]/40 text-gray-700 font-medium text-xs border border-[#e1e5e6] shadow-2xs transition active:scale-[0.98]" title="Ekspor laporan siap cetak ke format Excel">
+                    <svg class="w-4 h-4 text-[#279b92]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                     Cetak Laporan (XLSX)
                 </a>
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 
     <!-- Filter Bar (Librarian) -->
     @if(auth()->user()->isPustakawan())
-        <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs">
+        <div class="scroll-reveal delay-1 bg-white p-4.5 rounded-xl border border-[#e1e5e6] shadow-xs card-hover">
             <form method="GET" action="{{ route('visits.index') }}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <div>
-                    <label class="block text-[11px] font-semibold text-slate-500 mb-1">Mulai Tanggal</label>
-                    <input type="date" name="start_date" value="{{ $startDate }}" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 text-xs">
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Mulai Tanggal</label>
+                    <input type="date" name="start_date" value="{{ $startDate }}" class="w-full px-3 py-2 rounded-lg border border-[#e1e5e6] text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-slate-500 mb-1">Sampai Tanggal</label>
-                    <input type="date" name="end_date" value="{{ $endDate }}" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 text-xs">
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Sampai Tanggal</label>
+                    <input type="date" name="end_date" value="{{ $endDate }}" class="w-full px-3 py-2 rounded-lg border border-[#e1e5e6] text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-slate-500 mb-1">Pencarian Siswa</label>
-                    <input type="text" name="search" value="{{ $search }}" placeholder="Nama siswa atau NIS..." class="w-full px-3 py-1.5 rounded-xl border border-slate-300 text-xs">
+                    <label class="block text-xs font-medium text-gray-700 mb-1.5">Pencarian Siswa</label>
+                    <input type="text" name="search" value="{{ $search }}" placeholder="Nama siswa atau NIS..." class="w-full px-3 py-2 rounded-lg border border-[#e1e5e6] text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
                 </div>
                 <div class="flex items-end gap-2">
-                    <button type="submit" class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs shadow-xs transition">
+                    <button type="submit" class="btn-press w-full py-2 px-3.5 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white font-medium text-xs shadow-2xs transition active:scale-[0.98]">
                         Terapkan Filter
                     </button>
                     @if($search || request('start_date') || request('end_date'))
-                        <a href="{{ route('visits.index') }}" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition" title="Reset Filter">
+                        <a href="{{ route('visits.index') }}" class="p-2 rounded-lg bg-[#e1e5e6]/60 hover:bg-[#e1e5e6] text-gray-700 transition shrink-0" title="Reset Filter">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -98,11 +101,22 @@
         </div>
     @endif
 
-    <!-- Visits Table Card -->
-    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+    <!-- Visits Table Card with Scroll Reveal & Hover -->
+    <div class="scroll-reveal delay-2 bg-white rounded-xl border border-[#e1e5e6] overflow-hidden shadow-xs card-hover">
+        <!-- Mobile Swipe Helper Indicator -->
+        <div class="md:hidden px-4 py-2 bg-[#f6f8fa] text-[11px] text-gray-500 border-b border-[#e1e5e6] flex items-center justify-between">
+            <span class="flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#279b92]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+                Geser tabel ke samping untuk melihat detail
+            </span>
+            <span class="text-[10px] font-mono text-gray-400">Scroll &rarr;</span>
+        </div>
+
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-                <thead class="bg-slate-50/80 border-b border-slate-200/80 text-slate-500 uppercase tracking-wider font-semibold">
+            <table class="w-full min-w-[680px] text-left text-xs">
+                <thead class="bg-[#e1e5e6]/50 border-b border-[#e1e5e6] text-gray-600 font-semibold uppercase text-[11px] tracking-wider">
                     <tr>
                         <th class="py-3 px-4 w-12 text-center">No</th>
                         <th class="py-3 px-4">Tanggal & Waktu</th>
@@ -115,29 +129,29 @@
                         @endif
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-[#e1e5e6]/60">
                     @forelse($visits as $index => $visit)
-                        <tr class="hover:bg-slate-50/60 transition">
-                            <td class="py-3.5 px-4 text-center text-slate-400 font-mono">
+                        <tr class="hover:bg-[#279b92]/5 hover:translate-x-0.5 transition-all duration-150">
+                            <td class="py-3.5 px-4 text-center text-gray-400 font-mono text-[11px]">
                                 {{ $visits->firstItem() + $index }}
                             </td>
                             <td class="py-3.5 px-4">
-                                <div class="font-medium text-slate-900">{{ \Carbon\Carbon::parse($visit->visit_date)->translatedFormat('d M Y') }}</div>
-                                <div class="text-[10px] text-slate-400">{{ $visit->created_at->format('H:i') }} WIB</div>
+                                <div class="font-semibold text-gray-900">{{ \Carbon\Carbon::parse($visit->visit_date)->translatedFormat('d M Y') }}</div>
+                                <div class="text-[10px] text-gray-400 font-mono">{{ $visit->created_at->format('H:i') }} WIB</div>
                             </td>
-                            <td class="py-3.5 px-4 font-mono font-medium text-slate-700">
+                            <td class="py-3.5 px-4 font-mono font-medium text-gray-700 text-[11px]">
                                 {{ $visit->user?->nis_nip ?? '-' }}
                             </td>
                             <td class="py-3.5 px-4">
-                                <div class="font-semibold text-slate-900">{{ $visit->user?->name ?? 'Tamu' }}</div>
-                                <div class="text-[10px] text-slate-400 capitalize">{{ $visit->user?->role ?? '-' }}</div>
+                                <div class="font-semibold text-gray-900 hover:text-[#279b92] transition">{{ $visit->user?->name ?? 'Tamu' }}</div>
+                                <div class="text-[10px] text-gray-400 capitalize">{{ $visit->user?->role ?? '-' }}</div>
                             </td>
                             <td class="py-3.5 px-4 text-center">
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-[#e1e5e6]/70 text-gray-700">
                                     {{ $visit->purpose }}
                                 </span>
                             </td>
-                            <td class="py-3.5 px-4 text-slate-500 max-w-xs truncate">
+                            <td class="py-3.5 px-4 text-gray-500 max-w-xs truncate">
                                 {{ $visit->notes ?: '-' }}
                             </td>
                             @if(auth()->user()->isPustakawan())
@@ -145,7 +159,7 @@
                                     <form method="POST" action="{{ route('visits.destroy', $visit) }}" onsubmit="return confirm('Hapus log kunjungan ini?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="p-1 text-slate-400 hover:text-rose-600 transition" title="Hapus Log">
+                                        <button type="submit" class="p-1.5 rounded-md text-gray-400 hover:text-rose-600 hover:bg-rose-50 transition" title="Hapus Log">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
@@ -156,7 +170,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="{{ auth()->user()->isPustakawan() ? 7 : 6 }}" class="py-12 text-center text-slate-400">
+                            <td colspan="{{ auth()->user()->isPustakawan() ? 7 : 6 }}" class="py-12 text-center text-gray-400">
                                 Belum ada data kunjungan yang tercatat.
                             </td>
                         </tr>
@@ -166,52 +180,52 @@
         </div>
 
         @if($visits->hasPages())
-            <div class="p-4 border-t border-slate-100">
+            <div class="p-4 border-t border-[#e1e5e6]">
                 {{ $visits->links() }}
             </div>
         @endif
     </div>
 
-    <!-- Manual Visit Check-in Modal -->
-    <div x-cloak x-show="checkinModal" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-        <div @click.outside="checkinModal = false" class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 space-y-4">
-            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-900 text-sm">Catat Kunjungan Baru</h3>
-                <button @click="checkinModal = false" class="text-slate-400 hover:text-slate-600">&times;</button>
-            </div>
+    @if(auth()->user()->isPustakawan())
+        <!-- Manual Visit Check-in Modal -->
+        <div x-cloak x-show="checkinModal" class="fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
+            <div @click.outside="checkinModal = false" class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-xl border border-[#e1e5e6] space-y-4 max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between border-b border-[#e1e5e6] pb-3">
+                    <h3 class="font-bold text-gray-900 text-sm">Catat Kunjungan Baru</h3>
+                    <button @click="checkinModal = false" class="text-gray-400 hover:text-gray-600 text-lg leading-none">&times;</button>
+                </div>
 
-            <div class="space-y-4">
-                @if(auth()->user()->isPustakawan())
+                <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-700 mb-1">NIS / NIP Siswa <span class="text-rose-500">*</span></label>
-                        <input type="text" x-model="nis" placeholder="Contoh: 2024101" class="w-full px-3 py-2 border rounded-xl text-xs font-mono">
+                        <label class="block text-xs font-medium text-gray-700 mb-1.5">NIS / NIP Siswa <span class="text-rose-500">*</span></label>
+                        <input type="text" x-model="nis" placeholder="Contoh: 2024101" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs font-mono bg-white focus:outline-none focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92]">
                     </div>
-                @endif
 
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tujuan Kunjungan</label>
-                    <select x-model="purpose" class="w-full px-3 py-2 border rounded-xl text-xs bg-white">
-                        <option value="Membaca">Membaca Buku / Referensi</option>
-                        <option value="Meminjam">Meminjam / Mengembalikan Buku</option>
-                        <option value="Tugas">Mengerjakan Tugas</option>
-                        <option value="Diskusi">Diskusi Belajar Kelompok</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1.5">Tujuan Kunjungan</label>
+                        <select x-model="purpose" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs bg-white focus:outline-none focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92]">
+                            <option value="Membaca">Membaca Buku / Referensi</option>
+                            <option value="Meminjam">Meminjam / Mengembalikan Buku</option>
+                            <option value="Tugas">Mengerjakan Tugas</option>
+                            <option value="Diskusi">Diskusi Belajar Kelompok</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
 
-                <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Catatan (Opsional)</label>
-                    <input type="text" x-model="notes" placeholder="Catatan kunjungan..." class="w-full px-3 py-2 border rounded-xl text-xs">
-                </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-700 mb-1.5">Catatan (Opsional)</label>
+                        <input type="text" x-model="notes" placeholder="Catatan kunjungan..." class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs bg-white focus:outline-none focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92]">
+                    </div>
 
-                <div class="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
-                    <button type="button" @click="checkinModal = false" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Batal</button>
-                    <button type="button" @click="submitVisit()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-sm transition">
-                        Simpan Presensi
-                    </button>
+                    <div class="flex items-center justify-end gap-2 pt-3 border-t border-[#e1e5e6]">
+                        <button type="button" @click="checkinModal = false" class="px-3.5 py-2 rounded-lg text-xs font-medium text-gray-700 bg-white border border-[#e1e5e6] hover:bg-[#e1e5e6]/40 transition active:scale-[0.98]">Batal</button>
+                        <button type="button" @click="submitVisit()" class="btn-press px-3.5 py-2 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white text-xs font-medium shadow-2xs transition active:scale-[0.98]">
+                            Simpan Presensi
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 </div>
 @endsection

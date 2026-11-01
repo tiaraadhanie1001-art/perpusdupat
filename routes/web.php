@@ -13,7 +13,7 @@ Route::get('/', function () {
     if (auth()->check()) {
         return auth()->user()->isPustakawan()
             ? redirect()->route('librarian.dashboard')
-            : redirect()->route('student.dashboard');
+            : redirect()->route('books.index');
     }
 
     return redirect()->route('login');
