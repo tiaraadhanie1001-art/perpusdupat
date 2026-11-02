@@ -83,14 +83,8 @@
                     </nav>
                 </div>
 
-                <!-- Right Actions: LAN Status, User Menu, & Mobile Toggle -->
+                <!-- Right Actions: User Menu & Mobile Toggle -->
                 <div class="flex items-center gap-3 sm:gap-6">
-                    <!-- LAN Status (Clean text, no card/badge) -->
-                    <div class="hidden lg:flex items-center gap-2 text-xs text-white/90 font-medium tracking-wide">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span>LAN Node Online</span>
-                    </div>
-
                     <!-- User Menu Dropdown -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" @click.outside="open = false" class="flex items-center gap-2.5 p-1 rounded-lg hover:bg-black/10 transition focus:outline-none">
@@ -225,22 +219,16 @@
                 </a>
             @endif
 
-            <div class="pt-2 border-t border-white/15 flex items-center justify-between">
-                @if(auth()->user()->isPustakawan())
+            @if(auth()->user()->isPustakawan())
+                <div class="pt-2 border-t border-white/15">
                     <a href="{{ route('kiosk.index') }}" target="_blank" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-black/15 hover:bg-black/25 transition">
                         <svg class="w-3.5 h-3.5 text-[#e1e5e6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                         <span>Buka Kiosk Mandiri</span>
                     </a>
-                @else
-                    <div></div>
-                @endif
-                <div class="inline-flex items-center gap-1.5 text-xs text-white/90 font-medium">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>LAN Online</span>
                 </div>
-            </div>
+            @endif
         </div>
     </header>
 
