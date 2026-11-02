@@ -9,9 +9,11 @@
     loanModal: false,
     selectedBook: null,
     isSubmittingLoan: false,
+    confirmedTerms: false,
     
     openLoanModal(book) {
         this.selectedBook = book;
+        this.confirmedTerms = false;
         this.loanModal = true;
     },
 
@@ -320,13 +322,32 @@
                         </div>
                     </div>
 
-                    <div class="p-3 bg-[#e1e5e6]/25 rounded-lg border border-[#e1e5e6] text-[11px] text-gray-600">
-                        Durasi peminjaman standar adalah <strong>7 hari</strong>. Setelah disetujui pustakawan, Anda dapat mengambil buku fisik di perpustakaan.
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-[#e1e5e6] space-y-2 text-xs">
+                        <div class="flex items-start gap-2">
+                            <span class="text-amber-600 font-bold shrink-0">⏳</span>
+                            <div class="text-gray-600 text-[11px] leading-relaxed">
+                                <strong class="text-gray-900 font-semibold">Batas Pengambilan:</strong> Maksimal <span class="font-bold text-amber-700">2 hari sekolah</span> di loket perpustakaan. Pengajuan otomatis kedaluwarsa jika buku tidak diambil.
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2 pt-2 border-t border-[#e1e5e6]">
+                            <span class="text-[#279b92] font-bold shrink-0">📅</span>
+                            <div class="text-gray-600 text-[11px] leading-relaxed">
+                                <strong class="text-gray-900 font-semibold">Masa Pinjam:</strong> Standar <strong>7 hari</strong>, baru mulai terhitung resmi saat buku fisik diserahkan oleh pustakawan di loket.
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Checkbox Konfirmasi Siswa -->
+                    <label class="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 cursor-pointer text-xs select-none hover:bg-amber-50 transition">
+                        <input type="checkbox" x-model="confirmedTerms" class="mt-0.5 w-4 h-4 rounded text-[#279b92] border-gray-300 focus:ring-[#279b92] transition">
+                        <span class="text-amber-950 text-[11px] leading-relaxed">
+                            Saya yakin ingin meminjam dan siap mengambil buku fisik di loket perpustakaan dalam batas waktu <strong>maksimal 2 hari</strong>.
+                        </span>
+                    </label>
 
                     <div class="flex items-center justify-end gap-2 pt-3 border-t border-[#e1e5e6]">
                         <button type="button" @click="loanModal = false" class="px-3.5 py-2 rounded-lg text-xs font-medium text-gray-700 bg-white border border-[#e1e5e6] hover:bg-[#e1e5e6]/40 transition active:scale-[0.98]">Batal</button>
-                        <button type="button" @click="submitLoan()" :disabled="isSubmittingLoan" class="btn-press px-3.5 py-2 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white text-xs font-medium transition flex items-center gap-1.5 shadow-2xs active:scale-[0.98]">
+                        <button type="button" @click="submitLoan()" :disabled="!confirmedTerms || isSubmittingLoan" :class="(!confirmedTerms || isSubmittingLoan) ? 'opacity-50 cursor-not-allowed' : 'active:scale-[0.98]'" class="btn-press px-4 py-2 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white text-xs font-semibold transition flex items-center gap-1.5 shadow-2xs">
                             <span x-show="isSubmittingLoan" class="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
                             <span>Ajukan Sekarang</span>
                         </button>

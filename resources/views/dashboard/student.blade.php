@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <!-- Student Stats (4 Cards with Scroll Reveal & Hover Lift) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <!-- Student Stats (3 Cards with Scroll Reveal & Hover Lift) -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <!-- Pinjaman Aktif -->
         <div class="scroll-reveal delay-1 bg-white p-4.5 rounded-xl border border-[#e1e5e6] shadow-xs card-hover group cursor-default">
             <div class="flex items-center justify-between">
@@ -102,24 +102,6 @@
             <div class="text-3xl font-bold text-gray-900 tracking-tight font-sans mt-3">{{ $stats['total_visits'] }}</div>
             <div class="text-[11px] text-gray-500 mt-1">Kehadiran di perpustakaan</div>
         </div>
-
-        <!-- Tanggungan Denda -->
-        <div class="scroll-reveal delay-4 bg-white p-4.5 rounded-xl border border-[#e1e5e6] shadow-xs card-hover group cursor-default">
-            <div class="flex items-center justify-between">
-                <span class="text-[10px] font-semibold tracking-wider text-gray-500 uppercase">Tanggungan Denda</span>
-                <div class="w-7 h-7 rounded-lg bg-[#e1e5e6]/60 flex items-center justify-center text-[#279b92] group-hover:scale-110 group-hover:bg-[#279b92] group-hover:text-white transition duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-            </div>
-            <div class="text-3xl font-bold tracking-tight font-sans mt-3 {{ $stats['unpaid_fines'] > 0 ? 'text-rose-600' : 'text-gray-900' }}">
-                Rp {{ number_format($stats['unpaid_fines'], 0, ',', '.') }}
-            </div>
-            <div class="text-[11px] {{ $stats['unpaid_fines'] > 0 ? 'text-rose-600 font-semibold' : 'text-gray-500' }} mt-1">
-                {{ $stats['unpaid_fines'] > 0 ? 'Harap selesaikan di loket pustakawan' : 'Bebas dari denda keterlambatan' }}
-            </div>
-        </div>
     </div>
 
     <!-- Active Loans Section -->
@@ -160,9 +142,12 @@
 
                     <div class="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-1 border-t sm:border-t-0 pt-2 sm:pt-0 border-gray-100">
                         @if($loan->status === 'menunggu_persetujuan')
-                            <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
-                                Menunggu Verifikasi Pustakawan
-                            </span>
+                            <div class="flex flex-col items-end">
+                                <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">
+                                    Menunggu Persetujuan
+                                </span>
+                                <span class="text-[10px] text-amber-600 mt-0.5 font-medium">Ambil di loket maks. 2 hari</span>
+                            </div>
                         @elseif($isOverdue)
                             <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-medium bg-rose-50 text-rose-700 border border-rose-200">
                                 Terlambat (Jatuh Tempo: {{ \Carbon\Carbon::parse($loan->due_date)->format('d M Y') }})

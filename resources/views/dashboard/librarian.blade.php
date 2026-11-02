@@ -5,25 +5,12 @@
     returnModal: false,
     selectedLoan: null,
     returnDate: '{{ date('Y-m-d') }}',
-    fineAmount: 0,
     notes: '',
     openReturnModal(loan) {
         this.selectedLoan = loan;
         this.returnDate = '{{ date('Y-m-d') }}';
         this.notes = '';
-        this.calculateFine(loan);
         this.returnModal = true;
-    },
-    calculateFine(loan) {
-        let due = new Date(loan.due_date);
-        let ret = new Date(this.returnDate);
-        let diffTime = ret - due;
-        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        if (diffDays > 0) {
-            this.fineAmount = diffDays * 1000;
-        } else {
-            this.fineAmount = 0;
-        }
     }
 }">
     <!-- Header Page & Action Buttons -->
@@ -113,10 +100,10 @@
             </div>
         </div>
 
-        <!-- Card 4: Terlambat & Denda -->
+        <!-- Card 4: Buku Terlambat -->
         <div class="scroll-reveal delay-4 bg-white p-4.5 rounded-xl border border-[#e1e5e6] flex flex-col justify-between shadow-xs card-hover group cursor-default">
             <div class="flex items-center justify-between">
-                <span class="text-[10px] font-semibold tracking-wider text-gray-500 uppercase">Terlambat & Denda</span>
+                <span class="text-[10px] font-semibold tracking-wider text-gray-500 uppercase">Buku Terlambat</span>
                 <span class="w-7 h-7 rounded-lg bg-[#e1e5e6]/60 flex items-center justify-center text-[#279b92] group-hover:scale-110 group-hover:bg-[#279b92] group-hover:text-white transition duration-200 shrink-0">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -125,7 +112,7 @@
             </div>
             <div class="mt-3">
                 <div class="text-3xl font-bold text-gray-900 tracking-tight font-sans {{ $stats['overdue_loans'] > 0 ? 'text-rose-600' : 'text-gray-900' }}">{{ number_format($stats['overdue_loans']) }}</div>
-                <div class="text-[11px] text-gray-500 mt-1">Total Denda: <span class="font-semibold text-gray-800">Rp {{ number_format($stats['total_fines'], 0, ',', '.') }}</span></div>
+                <div class="text-[11px] text-gray-500 mt-1">Melewati batas tempo</div>
             </div>
         </div>
     </div>
@@ -285,13 +272,7 @@
 
                     <div>
                         <label class="block text-xs font-semibold text-gray-700 mb-1">Tanggal Pengembalian</label>
-                        <input type="date" name="return_date" x-model="returnDate" @change="calculateFine(selectedLoan)" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1">Total Denda (Rp)</label>
-                        <input type="number" name="fine_amount" x-model="fineAmount" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs font-semibold text-rose-600 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 outline-none transition font-mono bg-white">
-                        <span class="text-[10px] text-gray-400 mt-1 block">Tarif sistem: Rp 1.000 / hari keterlambatan.</span>
+                        <input type="date" name="return_date" x-model="returnDate" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
                     </div>
 
                     <div>
