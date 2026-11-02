@@ -88,20 +88,6 @@
             <div class="text-3xl font-bold text-gray-900 tracking-tight font-sans mt-3">{{ $stats['completed_loans'] }}</div>
             <div class="text-[11px] text-gray-500 mt-1">Total riwayat peminjaman</div>
         </div>
-
-        <!-- Presensi Kunjungan -->
-        <div class="scroll-reveal delay-3 bg-white p-4.5 rounded-xl border border-[#e1e5e6] shadow-xs card-hover group cursor-default">
-            <div class="flex items-center justify-between">
-                <span class="text-[10px] font-semibold tracking-wider text-gray-500 uppercase">Presensi Kunjungan</span>
-                <div class="w-7 h-7 rounded-lg bg-[#e1e5e6]/60 flex items-center justify-center text-[#279b92] group-hover:scale-110 group-hover:bg-[#279b92] group-hover:text-white transition duration-200">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                </div>
-            </div>
-            <div class="text-3xl font-bold text-gray-900 tracking-tight font-sans mt-3">{{ $stats['total_visits'] }}</div>
-            <div class="text-[11px] text-gray-500 mt-1">Kehadiran di perpustakaan</div>
-        </div>
     </div>
 
     <!-- Active Loans Section -->

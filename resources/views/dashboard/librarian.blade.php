@@ -99,22 +99,6 @@
                 <div class="text-[11px] text-amber-600 font-medium mt-1">{{ $stats['pending_loans'] }} menunggu persetujuan</div>
             </div>
         </div>
-
-        <!-- Card 4: Buku Terlambat -->
-        <div class="scroll-reveal delay-4 bg-white p-4.5 rounded-xl border border-[#e1e5e6] flex flex-col justify-between shadow-xs card-hover group cursor-default">
-            <div class="flex items-center justify-between">
-                <span class="text-[10px] font-semibold tracking-wider text-gray-500 uppercase">Buku Terlambat</span>
-                <span class="w-7 h-7 rounded-lg bg-[#e1e5e6]/60 flex items-center justify-center text-[#279b92] group-hover:scale-110 group-hover:bg-[#279b92] group-hover:text-white transition duration-200 shrink-0">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                </span>
-            </div>
-            <div class="mt-3">
-                <div class="text-3xl font-bold text-gray-900 tracking-tight font-sans {{ $stats['overdue_loans'] > 0 ? 'text-rose-600' : 'text-gray-900' }}">{{ number_format($stats['overdue_loans']) }}</div>
-                <div class="text-[11px] text-gray-500 mt-1">Melewati batas tempo</div>
-            </div>
-        </div>
     </div>
 
     <!-- Two Columns: Recent Visits & Recent Loans with Scroll-Reveal -->
@@ -274,14 +258,13 @@
                         <label class="block text-xs font-semibold text-gray-700 mb-1">Tanggal Pengembalian</label>
                         <input type="date" name="return_date" x-model="returnDate" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white">
                     </div>
-
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1">Catatan Pustakawan (Kondisi Buku)</label>
-                        <textarea name="librarian_notes" x-model="notes" rows="2" placeholder="Contoh: Kondisi buku baik, halaman utuh dan bersih" class="w-full px-3 py-2 border border-[#e1e5e6] rounded-lg text-xs focus:ring-1 focus:ring-[#279b92] focus:border-[#279b92] outline-none transition bg-white"></textarea>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Catatan Pustakawan (Kondisi Buku)</label>
+                        <textarea name="librarian_notes" x-model="notes" rows="2" placeholder="Contoh: Kondisi buku baik, halaman utuh dan bersih" class="w-full px-3 py-2 border border-[#E7E3DA] rounded-xl text-xs focus:ring-2 focus:ring-[#183527] focus:border-[#183527] outline-none transition bg-white"></textarea>
                     </div>
 
-                    <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#e1e5e6]">
-                        <button type="button" @click="returnModal = false" class="px-4 py-2 rounded-lg text-xs font-medium text-gray-600 hover:bg-[#e1e5e6]/40 transition active:scale-[0.98]">
+                    <div class="flex items-center justify-end gap-2 pt-2 border-t border-[#F0ECE1]">
+                        <button type="button" @click="returnModal = false" class="px-4 py-2 rounded-xl text-xs font-semibold text-stone-600 hover:bg-[#FAF8F5] transition active:scale-[0.98]">
                             Batal
                         </button>
                         <button type="submit" class="btn-press px-4 py-2 rounded-lg bg-[#279b92] hover:bg-[#1f8078] text-white text-xs font-medium shadow-xs transition active:scale-[0.98]">
